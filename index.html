@@ -5,17 +5,24 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Δωρεάν Εκτίμηση Ακινήτου | Papastefanou Real</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f7f9;color:#222}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f7f9;color:#222}
 .box{max-width:820px;margin:25px auto;background:#fff;padding:30px;border-radius:16px;box-shadow:0 8px 25px #0002}
 .brand{text-align:center;color:#0789c7;font-weight:bold;letter-spacing:1px}
 h1{text-align:center;font-size:28px;margin:10px 0}.sub{text-align:center;color:#666;margin-bottom:25px}
 .step{display:none}.step.active{display:block}.progress{display:flex;gap:7px;margin:25px 0}
 .progress i{height:6px;flex:1;background:#ddd;border-radius:9px}.progress i.on{background:#0789c7}
-label{display:block;font-weight:bold;margin:14px 0 6px}input,select{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;font-size:16px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.choice{padding:16px;border:2px solid #ddd;border-radius:10px;text-align:center;cursor:pointer;font-weight:bold}
-.choice.sel,.choice:hover{border-color:#0789c7;background:#eef8fd}.checks label{font-weight:normal;background:#f6f6f6;padding:9px;border-radius:7px}
-.checks input{width:auto;margin-right:6px}.buttons{display:flex;gap:10px;margin-top:25px}.buttons button{padding:13px 22px;border:0;border-radius:8px;font-weight:bold;cursor:pointer}
-.next{background:#0789c7;color:#fff;margin-left:auto}.back{background:#e7e7e7}.price{font-size:34px;color:#0789c7;font-weight:bold;text-align:center;margin:20px}
+label{display:block;font-weight:bold;margin:14px 0 6px}
+input,select{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;font-size:16px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.choice{padding:16px;border:2px solid #ddd;border-radius:10px;text-align:center;cursor:pointer;font-weight:bold}
+.choice.sel,.choice:hover{border-color:#0789c7;background:#eef8fd}
+.checks label{font-weight:normal;background:#f6f6f6;padding:9px;border-radius:7px;margin:0}
+.checks input{width:auto;margin-right:6px}.buttons{display:flex;gap:10px;margin-top:25px}
+.buttons button{padding:13px 22px;border:0;border-radius:8px;font-weight:bold;cursor:pointer}
+.next{background:#0789c7;color:#fff;margin-left:auto}.back{background:#e7e7e7}
+.price{font-size:34px;color:#0789c7;font-weight:bold;text-align:center;margin:20px}
+.meta{text-align:center;color:#666;margin-top:-8px;margin-bottom:18px}
 .notice{background:#f2f5f7;padding:16px;border-radius:10px;line-height:1.6;font-size:14px}
 @media(max-width:650px){.box{margin:10px;padding:20px}.grid{grid-template-columns:1fr}}
 </style>
@@ -38,12 +45,12 @@ label{display:block;font-weight:bold;margin:14px 0 6px}input,select{width:100%;p
 <div class="step">
 <h2>2. Τι ακίνητο θέλετε να εκτιμήσετε;</h2>
 <div class="grid">
-<div class="choice" onclick="pick(this)">🏢 Διαμέρισμα</div>
-<div class="choice" onclick="pick(this)">🏠 Μονοκατοικία</div>
-<div class="choice" onclick="pick(this)">🏘️ Μεζονέτα</div>
-<div class="choice" onclick="pick(this)">🏗️ Ολόκληρο Κτίριο</div>
-<div class="choice" onclick="pick(this)">🏪 Επαγγελματικό Ακίνητο</div>
-<div class="choice" onclick="pick(this)">🌳 Οικόπεδο / Γη</div>
+<div class="choice" data-type="apartment" onclick="pick(this)">🏢 Διαμέρισμα</div>
+<div class="choice" data-type="house" onclick="pick(this)">🏠 Μονοκατοικία</div>
+<div class="choice" data-type="maisonette" onclick="pick(this)">🏘️ Μεζονέτα</div>
+<div class="choice" data-type="building" onclick="pick(this)">🏗️ Ολόκληρο Κτίριο</div>
+<div class="choice" data-type="commercial" onclick="pick(this)">🏪 Επαγγελματικό Ακίνητο</div>
+<div class="choice" data-type="land" onclick="pick(this)">🌳 Οικόπεδο / Γη</div>
 </div>
 <div class="buttons"><button class="back" onclick="prevStep()">← ΠΙΣΩ</button><button class="next" onclick="nextStep()">ΣΥΝΕΧΕΙΑ →</button></div>
 </div>
@@ -53,14 +60,15 @@ label{display:block;font-weight:bold;margin:14px 0 6px}input,select{width:100%;p
 <label>Επιφάνεια (τ.μ.)</label><input id="sqm" type="number">
 <label>Έτος κατασκευής</label><input id="year" type="number">
 <label>Όροφος</label>
-<select id="floor"><option>Ισόγειο</option><option>1ος</option><option>2ος</option><option>3ος</option><option>4ος</option><option>5ος</option><option>6ος+</option></select>
+<select id="floor"><option value="ground">Ισόγειο</option><option value="1">1ος</option><option value="2">2ος</option><option value="3">3ος</option><option value="4">4ος</option><option value="5">5ος</option><option value="6">6ος+</option></select>
 <label>Κατάσταση</label>
 <select id="condition"><option value="new">Νεόδμητο</option><option value="ren">Πλήρως ανακαινισμένο</option><option value="part">Μερικώς ανακαινισμένο</option><option value="vg">Πολύ καλή κατάσταση</option><option value="good">Καλή κατάσταση</option><option value="needs">Χρήζει ανακαίνισης</option></select>
+<label>Επιπλέον χαρακτηριστικά</label>
 <div class="checks grid">
-<label><input type="checkbox">Ασανσέρ</label><label><input type="checkbox">Parking</label>
-<label><input type="checkbox">Αποθήκη</label><label><input type="checkbox">Μεγάλα μπαλκόνια</label>
-<label><input type="checkbox">Πρόσοψη</label><label><input type="checkbox">Διαμπερές</label>
-<label><input type="checkbox">Ανοιχτωσιά / Θέα</label><label><input type="checkbox">Ρετιρέ</label>
+<label><input id="elevator" type="checkbox">Ασανσέρ</label><label><input id="parking" type="checkbox">Parking</label>
+<label><input id="storage" type="checkbox">Αποθήκη</label><label><input id="balcony" type="checkbox">Μεγάλα μπαλκόνια</label>
+<label><input id="front" type="checkbox">Πρόσοψη</label><label><input id="dual" type="checkbox">Διαμπερές</label>
+<label><input id="view" type="checkbox">Ανοιχτωσιά / Θέα</label><label><input id="penthouse" type="checkbox">Ρετιρέ</label>
 </div>
 <div class="buttons"><button class="back" onclick="prevStep()">← ΠΙΣΩ</button><button class="next" onclick="nextStep()">ΣΥΝΕΧΕΙΑ →</button></div>
 </div>
@@ -77,27 +85,45 @@ label{display:block;font-weight:bold;margin:14px 0 6px}input,select{width:100%;p
 <div class="step">
 <h2 style="text-align:center">Η ενδεικτική αξία του ακινήτου σας</h2>
 <div class="price" id="price"></div>
-<div class="notice">Η παραπάνω εκτίμηση είναι <b>ενδεικτική</b> και βασίζεται στα στοιχεία που καταχωρίσατε και στα διαθέσιμα δεδομένα της αγοράς. Η πραγματική εμπορική αξία μπορεί να προσδιοριστεί με μεγαλύτερη ακρίβεια μετά από επιτόπια αυτοψία από σύμβουλο της <b>Papastefanou Real</b>.</div>
+<div class="meta">Ενδεικτικό εύρος βάσει περιοχής και χαρακτηριστικών</div>
+<div class="notice">Η παραπάνω εκτίμηση είναι <b>ενδεικτική</b> και βασίζεται στα στοιχεία που καταχωρίσατε και στα διαθέσιμα δεδομένα της αγοράς. Η πραγματική εμπορική αξία του ακινήτου μπορεί να προσδιοριστεί με μεγαλύτερη ακρίβεια μετά από επιτόπια αυτοψία από σύμβουλο της <b>Papastefanou Real</b>.</div>
 </div>
 </div>
 
 <script>
-let s=0,steps=document.querySelectorAll('.step'),bars=document.querySelectorAll('.progress i');
+let s=0,ptype="",steps=document.querySelectorAll('.step'),bars=document.querySelectorAll('.progress i');
 function show(){steps.forEach((x,i)=>x.classList.toggle('active',i===s));bars.forEach((x,i)=>x.classList.toggle('on',i<=Math.min(s,3)))}
-function nextStep(){if(s<3){s++;show()}}
+function nextStep(){if(s===1&&!ptype){alert('Παρακαλώ επιλέξτε τύπο ακινήτου.');return}if(s<3){s++;show()}}
 function prevStep(){if(s>0){s--;show()}}
-function pick(x){document.querySelectorAll('.choice').forEach(y=>y.classList.remove('sel'));x.classList.add('sel')}
+function pick(x){document.querySelectorAll('.choice').forEach(y=>y.classList.remove('sel'));x.classList.add('sel');ptype=x.dataset.type}
+function norm(t){return (t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
+function basePrice(){
+let a=norm(document.getElementById('area').value+' '+document.getElementById('address').value);
+if(a.includes('αγια κυριακη')||a.includes('αμφοτερου'))return 2300;
+if(a.includes('χαριλαου')||a.includes('ζουμετικου'))return 2825;
+if(a.includes('πολιχνη')||a.includes('αρκαδιου'))return 1500;
+if(a.includes('αναληψη')||a.includes('μαντινειας'))return 2875;
+if(a.includes('κεντρο')||a.includes('αγιας σοφιας')||a.includes('σκρα'))return 3050;
+if(a.includes('καλαμαρια'))return 3120;
+if(a.includes('πυλαια'))return 2865;
+if(a.includes('τουμπα'))return 2570;
+return 2200}
+function factor(){
+let f=1,c=document.getElementById('condition').value,fl=document.getElementById('floor').value,y=+document.getElementById('year').value;
+if(c==='new')f*=1.12;else if(c==='ren')f*=1.08;else if(c==='part')f*=1.03;else if(c==='vg')f*=1.01;else if(c==='needs')f*=0.78;
+if(fl==='ground')f*=0.88;else if(fl==='1')f*=0.97;else if(fl==='3')f*=1.01;else if(fl==='4')f*=1.02;else if(fl==='5')f*=1.04;else if(fl==='6')f*=1.05;
+if(y>=2020)f*=1.08;else if(y>=2005)f*=1.04;else if(y>=1995)f*=1.02;
+if(ptype==='maisonette')f*=1.04;else if(ptype==='house')f*=1.03;
+if(document.getElementById('elevator').checked)f*=1.01;if(document.getElementById('parking').checked)f*=1.03;
+if(document.getElementById('storage').checked)f*=1.01;if(document.getElementById('balcony').checked)f*=1.02;
+if(document.getElementById('front').checked)f*=1.02;if(document.getElementById('dual').checked)f*=1.02;
+if(document.getElementById('view').checked)f*=1.03;if(document.getElementById('penthouse').checked)f*=1.03;
+return f}
 function result(){
 let n=document.getElementById('name').value.trim(),p=document.getElementById('phone').value.trim(),c=document.getElementById('consent').checked,q=+document.getElementById('sqm').value;
-if(!n||!p){alert('Συμπληρώστε ονοματεπώνυμο και τηλέφωνο.');return}
-if(!c){alert('Αποδεχθείτε την επεξεργασία των στοιχείων σας.');return}
-if(!q){alert('Συμπληρώστε σωστά τα τετραγωνικά μέτρα.');return}
-let v=2200,k=document.getElementById('condition').value;
-if(k==='new')v*=1.2;if(k==='ren')v*=1.12;if(k==='part')v*=1.05;if(k==='needs')v*=.78;
-let e=q*v,l=Math.round(e*.94/1000)*1000,h=Math.round(e*1.06/1000)*1000;
-document.getElementById('price').innerText=l.toLocaleString('el-GR')+' € – '+h.toLocaleString('el-GR')+' €';
-s=4;show();
-}
+if(!n||!p){alert('Συμπληρώστε ονοματεπώνυμο και τηλέφωνο.');return}if(!c){alert('Αποδεχθείτε την επεξεργασία των στοιχείων σας.');return}if(!q||q<=0){alert('Συμπληρώστε σωστά τα τετραγωνικά μέτρα.');return}
+let e=q*basePrice()*factor(),low=Math.round(e*.96/1000)*1000,high=Math.round(e*1.04/1000)*1000;
+document.getElementById('price').innerText=low.toLocaleString('el-GR')+' € – '+high.toLocaleString('el-GR')+' €';s=4;show()}
 </script>
 </body>
 </html>
