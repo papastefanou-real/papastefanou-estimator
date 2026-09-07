@@ -123,7 +123,7 @@ const labels={apartment:'Διαμέρισμα',house:'Μονοκατοικία',
   function sendLead(low,high){
 let features=['elevator','parking','storage','balcony','front','dual','view','penthouse'].filter(id=>document.getElementById(id).checked).join(', ');
 fetch('https://formsubmit.co/ajax/mpapastefanou22@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'Νέα Online Εκτίμηση - Papastefanou Real','Ονοματεπώνυμο':document.getElementById('name').value,'Τηλέφωνο':document.getElementById('phone').value,'Email':document.getElementById('email').value,'Διεύθυνση':document.getElementById('address').value,'Ταχυδρομικός Κώδικας':document.getElementById('postcode').value,'Περιοχή':document.getElementById('area').value,'Τύπος Ακινήτου':labels[ptype]||ptype,'Τετραγωνικά':document.getElementById('sqm').value+' τ.μ.','Έτος Κατασκευής':document.getElementById('year').value,'Όροφος':document.getElementById('floor').value,'Κατάσταση':labels[document.getElementById('condition').value]||document.getElementById('condition').value,'Χαρακτηριστικά':features,'Ενδεικτική Εκτίμηση':low.toLocaleString('el-GR')+' € – '+high.toLocaleString('el-GR')+' €'})}).catch(()=>{});}
- } 
+  
   function result(){
 let n=document.getElementById('name').value.trim(),p=document.getElementById('phone').value.trim(),c=document.getElementById('consent').checked,q=+document.getElementById('sqm').value;
 if(!n||!p){alert('Συμπληρώστε ονοματεπώνυμο και τηλέφωνο.');return}if(!c){alert('Αποδεχθείτε την επεξεργασία των στοιχείων σας.');return}if(!q||q<=0){alert('Συμπληρώστε σωστά τα τετραγωνικά μέτρα.');return}
