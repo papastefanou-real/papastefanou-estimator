@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Δωρεάν Εκτίμηση Ακινήτου | Papastefanou Real</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7f9;
+  color: #222;
+}
+
+.estimator {
+  max-width: 850px;
+  margin: 30px auto;
+  background: white;
+  border-radius: 16px;
+  padding: 35px;
+  box-shadow: 0 8px 30px rgba(0,0,0,.10);
+}
+
+.brand {
+  text-align: center;
+  margin-bottom: 8px;
+  color: #0789c7;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+h1 {
+  text-align: center;
+  margin: 8px 0;
+  font-size: 30px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.progress {
+  display: flex;
+  gap: 8px;
+  margin: 25px 0 35px;
+}
+
+.progress span {
+  height: 6px;
+  flex: 1;
+  background: #ddd;
+  border-radius: 10px;
+}
+
+.progress span.active {
+  background: #0789c7;
+}
+
+.step { display: none; }
+.step.active { display: block; }
+
+h2 {
+  margin-bottom: 22px;
+  font-size: 23px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin: 15px 0 7px;
+}
+
+input, select {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.option {
+  padding: 18px;
+  border: 2px solid #e2e2e2;
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.option:hover,
+.option.selected {
+  border-color: #0789c7;
+  background: #eef8fd;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.features label {
+  font-weight: normal;
+  margin: 0;
+  padding: 10px;
+  background: #f7f7f7;
+  border-radius: 7px;
+}
+
+.features input {
+  width: auto;
+  margin-right: 6px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+button {
+  border: 0;
+  padding: 14px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.next {
+  background: #0789c7;
+  color: white;
+  margin-left: auto;
+}
+
+.back {
+  background: #e8e8e8;
+  color: #333;
+}
+
+.result {
+  text-align: center;
+}
+
+.price {
+  font-size: 36px;
+  font-weight: bold;
+  color: #0789c7;
+  margin: 20px 0;
+}
+
+.notice {
+  background: #f3f6f8;
+  padding: 18px;
+  border-radius: 10px;
+  margin-top: 25px;
+  font-size: 14px;
+  line-height: 1.
